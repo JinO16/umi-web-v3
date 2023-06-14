@@ -1,8 +1,6 @@
 import { defineConfig } from 'umi';
 import routes from './src/router';
 
-const baseUrl = 'ekpsj16/portal/new-portal-test';
-const isDev = process.env.ENV === 'devp';
 console.log('process.env.ENV===>', process.env.ENV);
 export default defineConfig({
   nodeModulesTransform: {
@@ -11,7 +9,7 @@ export default defineConfig({
   routes: routes,
   fastRefresh: {},
   base: '/',
-  publicPath: isDev ? '/' : `/${baseUrl}/`,
+  publicPath: './',
   history: {
     type: 'hash'
   },
