@@ -2,6 +2,7 @@ import { defineConfig } from 'umi';
 import routes from './src/router';
 
 console.log('process.env.ENV===>', process.env.ENV);
+const isDev = process.env.ENV === 'devp';
 export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
@@ -19,17 +20,9 @@ export default defineConfig({
     config.output.filename('js/[name].[hash:8].js');
     config.output.chunkFilename('js/[name].[hash:8].async.js');
     // 将css文件打包到dist/css文件中
-    config.module.rule('css').oneOf('css').use('extract-css-loader').tap(() => ({
-      publicPath: '../',
-      hmr: false
-    }))
-    config.module.rule('less').oneOf('css').use('extract-css-loader').tap(() => ({
-      publicPath: '../',
-      hmr: false
-    }))
     config.module.rule('less').oneOf('css-modules').use('extract-css-loader').tap(() => ({
        publicPath: '../',
-       hmr: false
+       hmr: isDev
     }));
     
     config.plugin('extract-css').tap(() => [
